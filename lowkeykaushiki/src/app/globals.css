@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fbfaf6;
+  --foreground: #2a2019;
+  --paper: #fffefa;
+  --muted: #3f332b;
+  --line: #e8ded1;
+  --clay: #b86f52;
+  --rose: #9a4f58;
+  --sage: #687d61;
+  --ink: #2a2019;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Courier New", "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  --font-mono: "Courier New", "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+body {
+  background:
+    linear-gradient(rgba(42, 32, 25, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 32, 25, 0.024) 1px, transparent 1px),
+    var(--background);
+  background-size: 28px 28px;
+  color: var(--foreground);
+  font-family: "Courier New", "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+::selection {
+  background: #eec6ad;
+  color: var(--ink);
+}
+
+a {
+  text-underline-offset: 4px;
+}
+
+.wordmark {
+  font-family: "Courier New", "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0;
+}
+
+.typewriter-title {
+  font-family: "Courier New", "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  max-width: 18ch;
+}
+
+.typewriter-title::after {
+  animation: cursor-blink 1.05s steps(1) infinite;
+  color: #b86f52;
+  content: "_";
+  display: inline-block;
+  margin-left: 0.08em;
+}
+
+.type-chip {
+  font-family: "Courier New", "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+.modern-panel {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 22px 60px rgba(42, 32, 25, 0.08);
+}
+
+.scanline {
+  position: relative;
+}
+
+.scanline::before {
+  background: linear-gradient(90deg, transparent, rgba(184, 111, 82, 0.32), transparent);
+  content: "";
+  height: 1px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.content-flow h2 {
+  color: var(--ink);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 2rem;
+}
+
+.content-flow h3 {
+  color: var(--ink);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+.content-flow p {
+  color: #2f261f;
+  font-weight: 500;
+  line-height: 1.9;
+  margin-top: 1rem;
+}
+
+.content-flow ul,
+.content-flow ol {
+  color: #2f261f;
+  font-weight: 500;
+  line-height: 1.9;
+  margin: 1rem 0 0 1.25rem;
+}
+
+.content-flow li {
+  padding-left: 0.25rem;
+}
+
+.content-flow blockquote {
+  border-left: 4px solid #b86f52;
+  color: #352a23;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+}
+
+.content-flow a {
+  color: #9a4f58;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.content-flow strong {
+  color: #2a2019;
+}
+
+.content-flow ul {
+  list-style: disc;
+}
+
+.content-flow ol {
+  list-style: decimal;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: #a8978a;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 1rem 0 0.5rem;
+}
+
+.tiptap ul,
+.tiptap ol {
+  margin: 0.75rem 0 0.75rem 1.25rem;
+}
+
+.tiptap ul {
+  list-style: disc;
+}
+
+.tiptap ol {
+  list-style: decimal;
+}
+
+.tiptap blockquote {
+  border-left: 4px solid #b86f52;
+  color: #5c4d43;
+  margin: 1rem 0;
+  padding-left: 1rem;
+}
