@@ -56,11 +56,15 @@ export async function listPublishedPosts() {
     return demoPosts;
   }
 
-  const db = await getDb();
-  return collection(db)
-    .find({ published: true })
-    .sort({ createdAt: -1 })
-    .toArray();
+  try {
+    const db = await getDb();
+    return collection(db)
+      .find({ published: true })
+      .sort({ createdAt: -1 })
+      .toArray();
+  } catch {
+    return demoPosts;
+  }
 }
 
 export async function listAllPosts() {
@@ -68,8 +72,12 @@ export async function listAllPosts() {
     return demoPosts;
   }
 
-  const db = await getDb();
-  return collection(db).find({}).sort({ createdAt: -1 }).toArray();
+  try {
+    const db = await getDb();
+    return collection(db).find({}).sort({ createdAt: -1 }).toArray();
+  } catch {
+    return demoPosts;
+  }
 }
 
 export async function getPostBySlug(slug: string) {
@@ -77,8 +85,12 @@ export async function getPostBySlug(slug: string) {
     return demoPosts.find((post) => post.slug === slug && post.published) || null;
   }
 
-  const db = await getDb();
-  return collection(db).findOne({ slug, published: true });
+  try {
+    const db = await getDb();
+    return collection(db).findOne({ slug, published: true });
+  } catch {
+    return demoPosts.find((post) => post.slug === slug && post.published) || null;
+  }
 }
 
 export async function getPostById(id: string) {
@@ -86,8 +98,12 @@ export async function getPostById(id: string) {
     return demoPosts.find((post) => String(post._id) === id) || null;
   }
 
-  const db = await getDb();
-  return collection(db).findOne({ _id: new ObjectId(id) });
+  try {
+    const db = await getDb();
+    return collection(db).findOne({ _id: new ObjectId(id) });
+  } catch {
+    return demoPosts.find((post) => String(post._id) === id) || null;
+  }
 }
 
 export async function createPost(input: PostInput) {

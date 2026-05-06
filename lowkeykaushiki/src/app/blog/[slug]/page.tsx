@@ -3,12 +3,7 @@ import { CalendarDays } from "lucide-react";
 import { RichContent } from "@/components/RichContent";
 import { SiteHeader } from "@/components/SiteHeader";
 import { formatDate, formatDateTime, readingTime } from "@/lib/format";
-import { getPostBySlug, listPublishedPosts } from "@/lib/posts";
-
-export async function generateStaticParams() {
-  const posts = await listPublishedPosts();
-  return posts.map((post) => ({ slug: post.slug }));
-}
+import { getPostBySlug } from "@/lib/posts";
 
 export default async function BlogPostPage({
   params,

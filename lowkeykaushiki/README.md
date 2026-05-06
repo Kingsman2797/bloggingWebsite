@@ -10,6 +10,7 @@ A warm, minimal personal blogging site built with Next.js. The public site is op
 - Resend for contact form email delivery
 - Tiptap rich text editor in the admin post form
 - Env-based admin login with signed HTTP-only session cookies
+- Optional Instagram footer link via `NEXT_PUBLIC_INSTAGRAM_URL`
 
 ## Local setup
 
@@ -37,6 +38,7 @@ SESSION_SECRET=replace-with-a-long-random-string
 RESEND_API_KEY=
 CONTACT_TO_EMAIL=you@example.com
 CONTACT_FROM_EMAIL=lowkeykaushiki <onboarding@resend.dev>
+NEXT_PUBLIC_INSTAGRAM_URL=https://instagram.com/lowkeykaushikey
 ```
 
 For production, use a strong `ADMIN_PASSWORD` and a long random `SESSION_SECRET`.
@@ -48,6 +50,13 @@ For production, use a strong `ADMIN_PASSWORD` and a long random `SESSION_SECRET`
 3. Create a Resend API key and add the email variables.
 4. Import the GitHub repo into Vercel Hobby and add all environment variables.
 5. Deploy.
+
+## Email setup
+
+1. Create a Resend account and verify your sender domain, or use the onboarding sender while testing.
+2. Add `RESEND_API_KEY` and `CONTACT_TO_EMAIL` to `.env.local` and Vercel.
+3. Keep `CONTACT_FROM_EMAIL` as a verified sender or the Resend onboarding sender.
+4. Send a test message from the contact form and confirm it lands in your inbox.
 
 ## Scripts
 
