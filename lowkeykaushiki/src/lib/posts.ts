@@ -2,6 +2,36 @@ import { ObjectId } from "mongodb";
 import { getDb, hasMongoConfig } from "./mongodb";
 import type { BlogPost, PostInput } from "./types";
 
+type FallbackCategory = "nature" | "street" | "city" | "places" | "art";
+
+const fallbackImages: Record<FallbackCategory, string[]> = {
+  nature: [
+    "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80",
+  ],
+  street: [
+    "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
+  ],
+  city: [
+    "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1c?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1400&q=80",
+  ],
+  places: [
+    "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80",
+  ],
+  art: [
+    "https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1400&q=80",
+    "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1400&q=80",
+  ],
+};
+
 const demoPosts: BlogPost[] = [
   {
     _id: "demo-1",
@@ -41,6 +71,35 @@ function collectionName() {
 
 function collection(db: Awaited<ReturnType<typeof getDb>>) {
   return db.collection<BlogPost>(collectionName());
+}
+
+function inferFallbackCategory(post: Pick<PostInput, "title" | "tags" | "excerpt" | "content">): FallbackCategory {
+  const text = `${post.title} ${post.excerpt} ${post.content} ${post.tags.join(" ")}`.toLowerCase();
+
+  if (/(nature|forest|river|mountain|sky|ocean|sea|beach|tree|sunset|sunrise)/.test(text)) {
+    return "nature";
+  }
+
+  if (/(street|road|people|crowd|market|walk|walks|walking|daily|urban)/.test(text)) {
+    return "street";
+  }
+
+  if (/(city|cities|metro|skyscraper|tower|building|urban|downtown|nightlife)/.test(text)) {
+    return "city";
+  }
+
+  if (/(place|travel|trip|journey|home|space|room|station|cafe|gallery|hotel)/.test(text)) {
+    return "places";
+  }
+
+  return "art";
+}
+
+function categoryFallbackImage(post: Pick<PostInput, "title" | "tags" | "excerpt" | "content">) {
+  const category = inferFallbackCategory(post);
+  const list = fallbackImages[category];
+  const seed = `${post.title}-${post.tags.join(",")}-${post.excerpt}`.length;
+  return list[seed % list.length];
 }
 
 export function makeSlug(value: string) {
@@ -111,6 +170,7 @@ export async function createPost(input: PostInput) {
   const now = new Date();
   const post: BlogPost = {
     ...input,
+    coverImage: input.coverImage || categoryFallbackImage(input),
     createdAt: now,
     updatedAt: now,
   };
@@ -123,7 +183,13 @@ export async function updatePost(id: string, input: PostInput) {
   const db = await getDb();
   return collection(db).updateOne(
     { _id: new ObjectId(id) },
-    { $set: { ...input, updatedAt: new Date() } },
+    {
+      $set: {
+        ...input,
+        coverImage: input.coverImage || categoryFallbackImage(input),
+        updatedAt: new Date(),
+      },
+    },
   );
 }
 

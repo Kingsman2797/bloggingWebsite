@@ -34,7 +34,7 @@ export function PostForm({
       <Field
         label="Cover image URL"
         name="coverImage"
-        required
+        placeholder="leave blank to auto-pick a random image"
         defaultValue={post?.coverImage}
       />
       <Field

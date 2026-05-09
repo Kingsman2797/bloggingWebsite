@@ -23,8 +23,8 @@ function postInputFromForm(formData: FormData): PostInput {
     .map((tag) => tag.trim())
     .filter(Boolean);
 
-  if (!title || !content || !excerpt || !coverImage) {
-    throw new Error("Title, excerpt, cover image, and content are required.");
+  if (!title || !content || !excerpt) {
+    throw new Error("Title, excerpt, and content are required.");
   }
 
   return {
