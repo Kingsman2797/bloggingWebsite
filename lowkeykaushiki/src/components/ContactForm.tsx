@@ -13,18 +13,18 @@ export function ContactForm() {
   return (
     <form action={action} className="grid gap-4">
       <div className="grid gap-2">
-        <label className="text-sm font-bold text-[#3d3027]" htmlFor="name">
+        <label className="text-sm font-bold text-[var(--foreground)]" htmlFor="name">
           Name
         </label>
         <input
           id="name"
           name="name"
           required
-          className="rounded-[0.35rem] border border-[#cdbbaa] bg-[#fffefa] px-4 py-3 text-[#2a2019] outline-none ring-[#b86f52]/20 transition focus:border-[#b86f52] focus:ring-4"
+          className="rounded-[0.35rem] border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-[var(--foreground)] outline-none ring-[var(--clay)]/20 transition focus:border-[var(--clay)] focus:ring-4"
         />
       </div>
       <div className="grid gap-2">
-        <label className="text-sm font-bold text-[#3d3027]" htmlFor="email">
+        <label className="text-sm font-bold text-[var(--foreground)]" htmlFor="email">
           Email
         </label>
         <input
@@ -32,11 +32,11 @@ export function ContactForm() {
           name="email"
           type="email"
           required
-          className="rounded-[0.35rem] border border-[#cdbbaa] bg-[#fffefa] px-4 py-3 text-[#2a2019] outline-none ring-[#b86f52]/20 transition focus:border-[#b86f52] focus:ring-4"
+          className="rounded-[0.35rem] border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-[var(--foreground)] outline-none ring-[var(--clay)]/20 transition focus:border-[var(--clay)] focus:ring-4"
         />
       </div>
       <div className="grid gap-2">
-        <label className="text-sm font-bold text-[#3d3027]" htmlFor="message">
+        <label className="text-sm font-bold text-[var(--foreground)]" htmlFor="message">
           Message
         </label>
         <textarea
@@ -44,12 +44,12 @@ export function ContactForm() {
           name="message"
           required
           rows={6}
-          className="resize-none rounded-[0.35rem] border border-[#cdbbaa] bg-[#fffefa] px-4 py-3 text-[#2a2019] outline-none ring-[#b86f52]/20 transition focus:border-[#b86f52] focus:ring-4"
+          className="resize-none rounded-[0.35rem] border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-[var(--foreground)] outline-none ring-[var(--clay)]/20 transition focus:border-[var(--clay)] focus:ring-4"
         />
       </div>
       <SubmitButton idleLabel="Send message" pendingLabel="Sending..." />
       {state.message ? (
-        <p className={`text-sm font-semibold ${state.ok ? "text-[#557348]" : "text-[#9a4f58]"}`}>
+        <p className={`text-sm font-semibold ${state.ok ? "text-[var(--sage)]" : "text-[var(--rose)]"}`}>
           {state.message}
         </p>
       ) : null}

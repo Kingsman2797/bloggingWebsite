@@ -2,6 +2,7 @@
 
 :root {
   --background: #fbfaf6;
+  --background-grid: rgba(42, 32, 25, 0.024);
   --foreground: #2a2019;
   --paper: #fffefa;
   --muted: #3f332b;
@@ -10,6 +11,19 @@
   --rose: #9a4f58;
   --sage: #687d61;
   --ink: #2a2019;
+}
+
+html.dark {
+  --background: #12100d;
+  --background-grid: rgba(255, 248, 239, 0.04);
+  --foreground: #f5ede2;
+  --paper: #1a1713;
+  --muted: #d7cab8;
+  --line: #3b322a;
+  --clay: #e0a37f;
+  --rose: #d58a95;
+  --sage: #a3b192;
+  --ink: #f5ede2;
 }
 
 @theme inline {
@@ -21,8 +35,8 @@
 
 body {
   background:
-    linear-gradient(rgba(42, 32, 25, 0.024) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(42, 32, 25, 0.024) 1px, transparent 1px),
+    linear-gradient(var(--background-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--background-grid) 1px, transparent 1px),
     var(--background);
   background-size: 28px 28px;
   color: var(--foreground);
@@ -62,7 +76,7 @@ a {
 
 .modern-panel {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
     0 22px 60px rgba(42, 32, 25, 0.08);
 }
 
@@ -137,6 +151,20 @@ a {
   color: #2a2019;
 }
 
+html.dark .content-flow strong {
+  color: var(--ink);
+}
+
+html.dark .content-flow p,
+html.dark .content-flow ul,
+html.dark .content-flow ol {
+  color: var(--muted);
+}
+
+html.dark .content-flow blockquote {
+  color: var(--paper);
+}
+
 .content-flow ul {
   list-style: disc;
 }
@@ -177,4 +205,9 @@ a {
   color: #5c4d43;
   margin: 1rem 0;
   padding-left: 1rem;
+}
+
+html.dark .tiptap {
+  background: var(--paper);
+  color: var(--foreground);
 }

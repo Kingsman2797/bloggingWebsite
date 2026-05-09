@@ -17,21 +17,21 @@ export default async function AdminDashboard() {
   const mongoReady = hasMongoConfig();
 
   return (
-    <main className="min-h-screen bg-[#fbfaf6] px-5 py-8">
+    <main className="min-h-screen bg-[var(--background)] px-5 py-8">
       <div className="mx-auto max-w-6xl">
-        <header className="flex flex-col justify-between gap-4 border-b border-[#e8ded1] pb-6 md:flex-row md:items-center">
+        <header className="flex flex-col justify-between gap-4 border-b border-[var(--line)] pb-6 md:flex-row md:items-center">
           <div>
-            <p className="text-sm font-black uppercase tracking-normal text-[#9a4f58]">
+            <p className="text-sm font-black uppercase tracking-normal text-[var(--rose)]">
               lowkeykaushiki admin
             </p>
-            <h1 className="mt-1 text-4xl font-black tracking-normal text-[#2a2019]">
+            <h1 className="mt-1 text-4xl font-black tracking-normal text-[var(--foreground)]">
               Blog dashboard
             </h1>
           </div>
           <div className="flex gap-3">
             <Link
               href="/admin/new"
-              className="inline-flex items-center gap-2 rounded-[0.35rem] bg-[#2a2019] px-4 py-3 font-bold text-[#fbfaf6]"
+              className="inline-flex items-center gap-2 rounded-[0.35rem] bg-[var(--foreground)] px-4 py-3 font-bold text-[var(--background)]"
             >
               <Plus className="h-4 w-4" />
               New post
@@ -43,34 +43,34 @@ export default async function AdminDashboard() {
         </header>
 
         {!mongoReady ? (
-          <div className="mt-6 rounded-[0.5rem] border border-[#d9a3a3] bg-[#fff0f0] p-4 text-sm font-semibold leading-6 text-[#9a4f58]">
+          <div className="mt-6 rounded-[0.5rem] border border-[color-mix(in_srgb,var(--rose)_25%,var(--line))] bg-[color-mix(in_srgb,var(--rose)_12%,var(--paper))] p-4 text-sm font-semibold leading-6 text-[var(--rose)]">
             MongoDB is not configured yet. The dashboard is showing demo posts;
             add `MONGODB_URI` in `.env.local` before creating or editing real posts.
           </div>
         ) : null}
 
-        <section className="mt-8 overflow-hidden rounded-[0.35rem] border border-[#e8ded1] bg-[#fffefa]">
+        <section className="mt-8 overflow-hidden rounded-[0.35rem] border border-[var(--line)] bg-[var(--paper)]">
           {posts.map((post) => (
             <div
               key={String(post._id)}
-              className="grid gap-4 border-b border-[#e8ded1] p-5 last:border-b-0 md:grid-cols-[1fr_auto] md:items-center"
+              className="grid gap-4 border-b border-[var(--line)] p-5 last:border-b-0 md:grid-cols-[1fr_auto] md:items-center"
             >
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#fbfaf6] px-3 py-1 text-xs font-bold text-[#9a4f58]">
+                  <span className="rounded-full bg-[var(--background)] px-3 py-1 text-xs font-bold text-[var(--rose)]">
                     {post.published ? "Published" : "Draft"}
                   </span>
-                  <span className="text-xs font-semibold text-[#75675d]">
+                  <span className="text-xs font-semibold text-[var(--muted)]">
                     {formatDate(post.updatedAt)}
                   </span>
                 </div>
-                <h2 className="mt-3 text-xl font-black text-[#2a2019]">{post.title}</h2>
-                <p className="mt-1 text-sm text-[#75675d]">/{post.slug}</p>
+                <h2 className="mt-3 text-xl font-black text-[var(--foreground)]">{post.title}</h2>
+                <p className="mt-1 text-sm text-[var(--muted)]">/{post.slug}</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <Link
                   href={`/admin/posts/${String(post._id)}/edit`}
-                  className="inline-flex items-center gap-2 rounded-[0.5rem] border border-[#cfae95] px-3 py-2 text-sm font-bold"
+                  className="inline-flex items-center gap-2 rounded-[0.5rem] border border-[var(--line)] bg-[var(--paper)] px-3 py-2 text-sm font-bold text-[var(--foreground)]"
                 >
                   <Edit3 className="h-4 w-4" />
                   Edit
@@ -86,14 +86,14 @@ export default async function AdminDashboard() {
                   <SubmitButton
                     idleLabel="Delete"
                     pendingLabel="Deleting..."
-                    className="px-3 py-2 text-sm text-[#9a4f58] bg-[#fff0f0] border border-[#d9a3a3] hover:bg-[#ffe2e2]"
+                    className="border border-[color-mix(in_srgb,var(--rose)_25%,var(--line))] bg-[color-mix(in_srgb,var(--rose)_12%,var(--paper))] px-3 py-2 text-sm text-[var(--rose)] hover:bg-[color-mix(in_srgb,var(--rose)_18%,var(--paper))]"
                   />
                 </form>
               </div>
             </div>
           ))}
           {posts.length === 0 ? (
-            <p className="p-6 text-[#75675d]">No posts yet. Start with a first note.</p>
+            <p className="p-6 text-[var(--muted)]">No posts yet. Start with a first note.</p>
           ) : null}
         </section>
       </div>

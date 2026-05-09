@@ -19,15 +19,15 @@ export default async function EditPostPage({
   }
 
   return (
-    <main className="min-h-screen bg-[#fbfaf6] px-5 py-8">
+    <main className="min-h-screen bg-[var(--background)] px-5 py-8">
       <div className="mx-auto max-w-3xl">
-        <Link className="text-sm font-bold text-[#9a4f58]" href="/admin">
+        <Link className="text-sm font-bold text-[var(--rose)]" href="/admin">
           Back to dashboard
         </Link>
-        <h1 className="mt-5 text-4xl font-black tracking-normal text-[#2a2019]">
+        <h1 className="mt-5 text-4xl font-black tracking-normal text-[var(--foreground)]">
           Edit post
         </h1>
-        <div className="mt-8 rounded-[0.35rem] border border-[#e8ded1] bg-[#fffefa] p-6">
+        <div className="mt-8 rounded-[0.35rem] border border-[var(--line)] bg-[var(--paper)] p-6">
           <PostForm action={updatePostAction.bind(null, id)} post={post} />
         </div>
       </div>

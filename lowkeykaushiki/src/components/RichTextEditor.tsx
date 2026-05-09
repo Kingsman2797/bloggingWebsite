@@ -35,7 +35,7 @@ export function RichTextEditor({
         autolink: true,
         defaultProtocol: "https",
         HTMLAttributes: {
-          class: "text-[#9a4f58] underline decoration-[#d9a3a3]",
+          class: "text-[var(--rose)] underline decoration-[var(--line)]",
         },
       }),
       Placeholder.configure({
@@ -43,12 +43,12 @@ export function RichTextEditor({
       }),
     ],
     content: defaultValue || "<p></p>",
-    editorProps: {
-      attributes: {
-        class:
-          "min-h-72 rounded-b-[0.5rem] bg-white px-4 py-4 text-[#2a2019] outline-none",
+      editorProps: {
+        attributes: {
+          class:
+            "min-h-72 rounded-b-[0.5rem] bg-[var(--paper)] px-4 py-4 text-[var(--foreground)] outline-none",
+        },
       },
-    },
     onUpdate({ editor: currentEditor }) {
       setHtml(currentEditor.getHTML());
     },
@@ -75,9 +75,9 @@ export function RichTextEditor({
   }
 
   return (
-    <div className="overflow-hidden rounded-[0.5rem] border border-[#dfc7b3] bg-white">
+    <div className="overflow-hidden rounded-[0.5rem] border border-[var(--line)] bg-[var(--paper)]">
       <input type="hidden" name={name} value={html} />
-      <div className="flex flex-wrap gap-1 border-b border-[#ead8c6] bg-[#fff8ef] p-2">
+      <div className="flex flex-wrap gap-1 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper)_92%,var(--background))] p-2">
         <ToolButton
           active={editor?.isActive("bold")}
           label="Bold"
@@ -127,7 +127,7 @@ export function RichTextEditor({
         >
           <LinkIcon className="h-4 w-4" />
         </ToolButton>
-        <span className="mx-1 h-8 w-px bg-[#ead8c6]" />
+        <span className="mx-1 h-8 w-px bg-[var(--line)]" />
         <ToolButton label="Undo" onClick={() => editor?.chain().focus().undo().run()}>
           <Undo2 className="h-4 w-4" />
         </ToolButton>
@@ -157,10 +157,10 @@ function ToolButton({
       title={label}
       aria-label={label}
       onClick={onClick}
-      className={`grid h-9 w-9 place-items-center rounded-[0.45rem] border text-[#2a2019] transition ${
+      className={`grid h-9 w-9 place-items-center rounded-[0.45rem] border text-[var(--foreground)] transition ${
         active
-          ? "border-[#b86f52] bg-[#f4b183]"
-          : "border-transparent hover:border-[#dfc7b3] hover:bg-white"
+          ? "border-[var(--clay)] bg-[color-mix(in_srgb,var(--clay)_24%,var(--paper))]"
+          : "border-transparent hover:border-[var(--line)] hover:bg-[var(--background)]"
       }`}
     >
       {children}

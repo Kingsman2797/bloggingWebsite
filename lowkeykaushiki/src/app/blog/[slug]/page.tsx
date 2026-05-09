@@ -18,7 +18,7 @@ export default async function BlogPostPage({
   }
 
   return (
-    <main className="min-h-screen bg-[#fbfaf6]">
+    <main className="min-h-screen bg-[var(--background)]">
       <SiteHeader />
       <article>
         <header className="mx-auto max-w-4xl px-5 py-14">
@@ -26,29 +26,29 @@ export default async function BlogPostPage({
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-[#e8ded1] bg-[#fffefa] px-3 py-1 text-xs font-bold text-[#7a3f34]"
+                className="rounded-full border border-[var(--line)] bg-[var(--paper)] px-3 py-1 text-xs font-bold text-[var(--rose)]"
               >
                 {tag}
               </span>
             ))}
           </div>
-          <h1 className="mt-6 text-4xl font-black leading-tight tracking-normal text-[#2a2019] md:text-5xl">
+          <h1 className="mt-6 text-4xl font-black leading-tight tracking-normal text-[var(--foreground)] md:text-5xl">
             {post.title}
           </h1>
-          <p className="mt-5 max-w-3xl text-lg font-medium leading-8 text-[#332920]">
+          <p className="mt-5 max-w-3xl text-lg font-medium leading-8 text-[var(--muted)]">
             {post.excerpt}
           </p>
-          <p className="mt-5 text-sm font-bold text-[#873f4b]">
+          <p className="mt-5 text-sm font-bold text-[var(--rose)]">
             {formatDate(post.createdAt)} · {readingTime(post.content)} min read
           </p>
         </header>
         {post.coverImage ? (
           <div className="mx-auto max-w-5xl px-5">
             <div
-              className="h-[420px] rounded-[0.35rem] border border-[#e8ded1] bg-cover bg-center"
+              className="h-[420px] rounded-[0.35rem] border border-[var(--line)] bg-cover bg-center"
               style={{ backgroundImage: `url(${post.coverImage})` }}
             />
-            <div className="mx-auto mt-4 flex w-fit items-center gap-2 rounded-full border border-[#e8ded1] bg-[#fffefa] px-4 py-2 text-sm font-bold text-[#873f4b] shadow-sm">
+            <div className="mx-auto mt-4 flex w-fit items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--paper)] px-4 py-2 text-sm font-bold text-[var(--rose)] shadow-sm">
               <CalendarDays className="h-4 w-4" />
               <time dateTime={new Date(post.createdAt).toISOString()}>
                 Published {formatDateTime(post.createdAt)}
