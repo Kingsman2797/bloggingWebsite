@@ -1,4 +1,4 @@
-import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
+import { Edit3, Plus } from "lucide-react";
 import Link from "next/link";
 import {
   deletePostAction,
@@ -9,6 +9,7 @@ import { formatDate } from "@/lib/format";
 import { requireAdmin } from "@/lib/auth";
 import { listAllPosts } from "@/lib/posts";
 import { hasMongoConfig } from "@/lib/mongodb";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function AdminDashboard() {
   await requireAdmin();
@@ -36,9 +37,7 @@ export default async function AdminDashboard() {
               New post
             </Link>
             <form action={logoutAction}>
-              <button className="rounded-[0.35rem] border border-[#cfae95] bg-[#fffefa] px-4 py-3 font-bold">
-                Logout
-              </button>
+              <SubmitButton idleLabel="Logout" pendingLabel="Logging out..." />
             </form>
           </div>
         </header>
@@ -77,16 +76,18 @@ export default async function AdminDashboard() {
                   Edit
                 </Link>
                 <form action={togglePublishedAction.bind(null, String(post._id), !post.published)}>
-                  <button className="inline-flex items-center gap-2 rounded-[0.5rem] border border-[#cfae95] px-3 py-2 text-sm font-bold">
-                    {post.published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    {post.published ? "Unpublish" : "Publish"}
-                  </button>
+                  <SubmitButton
+                    idleLabel={post.published ? "Unpublish" : "Publish"}
+                    pendingLabel={post.published ? "Unpublishing..." : "Publishing..."}
+                    className="px-3 py-2 text-sm"
+                  />
                 </form>
                 <form action={deletePostAction.bind(null, String(post._id))}>
-                  <button className="inline-flex items-center gap-2 rounded-[0.5rem] border border-[#d9a3a3] px-3 py-2 text-sm font-bold text-[#9a4f58]">
-                    <Trash2 className="h-4 w-4" />
-                    Delete
-                  </button>
+                  <SubmitButton
+                    idleLabel="Delete"
+                    pendingLabel="Deleting..."
+                    className="px-3 py-2 text-sm text-[#9a4f58] bg-[#fff0f0] border border-[#d9a3a3] hover:bg-[#ffe2e2]"
+                  />
                 </form>
               </div>
             </div>

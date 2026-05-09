@@ -1,6 +1,7 @@
 import { LockKeyhole } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { loginAction } from "../actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function LoginPage({
   searchParams,
@@ -53,12 +54,7 @@ export default async function LoginPage({
               className="rounded-[0.5rem] border border-[#dfc7b3] bg-white px-4 py-3 outline-none ring-[#b86f52]/20 focus:ring-4"
             />
           </div>
-          <button
-            type="submit"
-            className="rounded-[0.35rem] bg-[#2a2019] px-5 py-3 font-bold text-[#fbfaf6] transition hover:bg-[#4b382c]"
-          >
-            Sign in
-          </button>
+          <SubmitButton idleLabel="Sign in" pendingLabel="Signing in..." />
         </form>
       </div>
     </main>

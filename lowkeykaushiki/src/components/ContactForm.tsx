@@ -1,11 +1,11 @@
 "use client";
 
-import { Send } from "lucide-react";
 import { useActionState } from "react";
 import { sendContactMessage } from "@/app/actions";
+import { SubmitButton } from "./SubmitButton";
 
 export function ContactForm() {
-  const [state, action, pending] = useActionState(sendContactMessage, {
+  const [state, action] = useActionState(sendContactMessage, {
     ok: false,
     message: "",
   });
@@ -47,14 +47,7 @@ export function ContactForm() {
           className="resize-none rounded-[0.35rem] border border-[#cdbbaa] bg-[#fffefa] px-4 py-3 text-[#2a2019] outline-none ring-[#b86f52]/20 transition focus:border-[#b86f52] focus:ring-4"
         />
       </div>
-      <button
-        className="inline-flex items-center justify-center gap-2 rounded-[0.35rem] bg-[#2a2019] px-5 py-3 font-bold text-[#fbfaf6] transition hover:-translate-y-0.5 hover:bg-[#4b382c] disabled:cursor-not-allowed disabled:opacity-60"
-        disabled={pending}
-        type="submit"
-      >
-        <Send className="h-4 w-4" />
-        {pending ? "Sending..." : "Send message"}
-      </button>
+      <SubmitButton idleLabel="Send message" pendingLabel="Sending..." />
       {state.message ? (
         <p className={`text-sm font-semibold ${state.ok ? "text-[#557348]" : "text-[#9a4f58]"}`}>
           {state.message}

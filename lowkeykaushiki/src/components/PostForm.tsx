@@ -1,5 +1,6 @@
 import type { BlogPost } from "@/lib/types";
 import { RichTextEditor } from "./RichTextEditor";
+import { SubmitButton } from "./SubmitButton";
 
 export function PostForm({
   action,
@@ -57,12 +58,7 @@ export function PostForm({
         />
         Publish this post
       </label>
-      <button
-        type="submit"
-        className="rounded-[0.5rem] bg-[#2a2019] px-5 py-3 font-bold text-[#fff8ef] transition hover:bg-[#4b382c]"
-      >
-        Save post
-      </button>
+      <SubmitButton idleLabel="Save post" pendingLabel="Saving..." />
     </form>
   );
 }
